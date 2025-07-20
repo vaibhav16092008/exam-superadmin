@@ -11,13 +11,15 @@ const Sidebar = ({ isOpen }) => {
     ];
 
     return (
-        <div className={`${isOpen ? 'w-64' : 'w-20'} bg-gray-800 border-r border-gray-700 flex flex-col transition-all duration-300 ease-in-out`}>
+        <div className={`${isOpen ? 'w-64' : 'w-20'} bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-all duration-300 ease-in-out`}>
             {/* Logo */}
-            <div className="flex items-center justify-center h-16 border-b border-gray-700">
+            <div className="flex items-center justify-center h-16 border-b border-gray-200 dark:border-gray-700">
                 {isOpen ? (
-                    <h1 className="text-xl font-bold text-emerald-400">ExamManager</h1>
+                    <h1 className="text-xl font-bold text-emerald-600 dark:text-emerald-400 transition-colors duration-300">
+                        ExamManager
+                    </h1>
                 ) : (
-                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110">
                         <span className="text-white font-bold">EM</span>
                     </div>
                 )}
@@ -30,18 +32,22 @@ const Sidebar = ({ isOpen }) => {
                         <li key={item.name}>
                             <a
                                 href="#"
-                                className="flex items-center p-3 text-gray-300 hover:bg-gray-700 rounded-lg group transition-colors"
+                                className="flex items-center p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg group transition-colors duration-300"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-emerald-400 group-hover:text-emerald-300"
+                                    className="h-6 w-6 text-emerald-500 dark:text-emerald-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors duration-300"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
                                 >
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
                                 </svg>
-                                {isOpen && <span className="ml-3">{item.name}</span>}
+                                {isOpen && (
+                                    <span className="ml-3 transition-opacity duration-300">
+                                        {item.name}
+                                    </span>
+                                )}
                             </a>
                         </li>
                     ))}
@@ -49,15 +55,15 @@ const Sidebar = ({ isOpen }) => {
             </nav>
 
             {/* User Profile */}
-            <div className="p-4 border-t border-gray-700">
+            <div className="p-4 border-t border-gray-200 dark:border-gray-700">
                 <div className="flex items-center">
-                    <div className="h-10 w-10 rounded-full bg-emerald-500 flex items-center justify-center">
+                    <div className="h-10 w-10 rounded-full bg-emerald-500 flex items-center justify-center transition-transform duration-300 hover:scale-110">
                         <span className="text-white font-medium">SA</span>
                     </div>
                     {isOpen && (
-                        <div className="ml-3">
-                            <p className="text-sm font-medium text-white">Super Admin</p>
-                            <p className="text-xs text-gray-400">admin@exam.com</p>
+                        <div className="ml-3 transition-opacity duration-300">
+                            <p className="text-sm font-medium text-gray-800 dark:text-white">Super Admin</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">admin@exam.com</p>
                         </div>
                     )}
                 </div>
