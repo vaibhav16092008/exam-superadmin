@@ -1,10 +1,14 @@
 "use client";
 
+import { removeToken } from "@/utils/connection";
 import { NextURL } from "next/dist/server/web/next-url";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
 
 const Sidebar = ({ isOpen }) => {
+    const currentPath = usePathname();
+    const router = useRouter();
     const navItems = [
         {
             name: "Dashboard",
@@ -37,7 +41,11 @@ const Sidebar = ({ isOpen }) => {
             path: "/settings",
         },
     ];
-    const currentPath = usePathname();
+
+    const handleLogout = () => {
+        removeToken();
+        router.push('/login');
+    };
 
     return (
         <div
@@ -108,23 +116,36 @@ const Sidebar = ({ isOpen }) => {
                 </ul>
             </nav>
 
-            {/* User Profile */}
+            {/* Logout Button */}
             <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex items-center">
-                    <div className="h-10 w-10 rounded-full bg-emerald-500 flex items-center justify-center transition-transform duration-300 hover:scale-110">
-                        <span className="text-white font-medium">SA</span>
-                    </div>
+                <button
+                    onClick={handleLogout}
+                    className={`flex items-center w-full p-3 rounded-lg group transition-colors duration-300 cursor-pointer
+                    text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700`}
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-red-500 dark:text-red-400 group-hover:text-red-600 dark:group-hover:text-red-300"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                        />
+                    </svg>
                     {isOpen && (
-                        <div className="ml-3 transition-opacity duration-300">
-                            <p className="text-sm font-medium text-gray-800 dark:text-white">
-                                Super Admin
-                            </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                                admin@exam.com
-                            </p>
-                        </div>
+                        <span
+                            className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                                }`}
+                        >
+                            Logout
+                        </span>
                     )}
-                </div>
+                </button>
             </div>
         </div>
     );

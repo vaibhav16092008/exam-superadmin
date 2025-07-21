@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       >
         <Toaster position="top-right" />
         {children}
-        {/* <ThemeToggler />   */}
+        <ThemeToggler />
       </body>
     </html>
   );

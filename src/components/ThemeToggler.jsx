@@ -16,6 +16,7 @@ const ThemeToggler = () => {
 
         if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
             localStorage.setItem('theme', 'dark');
+            document.documentElement.classList.add('dark');
             setDarkMode(true);
         }
     }, []);
@@ -31,6 +32,7 @@ const ThemeToggler = () => {
                 document.documentElement.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
                 console.log(localStorage.getItem('theme'));
+
 
 
             } else {

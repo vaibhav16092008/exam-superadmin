@@ -13,5 +13,5 @@ export const setToken = (token = "") => {
 };
 
 export const removeToken = () => {
-  Cookies.remove(token);
+  Cookies.remove(tokenTitle);
 };
