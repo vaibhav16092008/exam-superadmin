@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import ThemeToggler from "@/components/ThemeToggler";
+import { UserProvider } from "@/contexts/UserContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,13 +21,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Toaster position="top-right" />
-        {children}
-        <ThemeToggler />
+        <UserProvider>
+          <Toaster position="top-right" />
+          {children}
+          <ThemeToggler />
+        </UserProvider>
       </body>
     </html>
   );

@@ -5,8 +5,10 @@ import { useRouter } from 'next/navigation';
 import { postCallWA } from '@/utils/apiCall';
 import toast from 'react-hot-toast';
 import { setToken } from '@/utils/connection';
+import { useUser } from '@/contexts/UserContext';
 
 const LoginPage = () => {
+    const { setUser } = useUser();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -24,16 +26,21 @@ const LoginPage = () => {
         try {
             const response = await postCallWA("auth/login", payload);
             const data = response?.data
+            console.log(data);
+
             if (response?.status === 200) {
                 toast.success(data?.message || "Login successful!");
                 setToken(data?.token);
+                setUser(data?.user)
                 router.push("/dashboard");
             }
             else {
-                toast.error(response?.data?.message)
+                toast.error(data?.message)
             }
         } catch (error) {
             toast.error(error);
+            console.log(error);
+
         } finally {
             setLoading(false)
         }
