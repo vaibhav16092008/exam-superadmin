@@ -5,8 +5,7 @@ import { NextURL } from "next/dist/server/web/next-url";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, setSidebarOpen }) => {
     const currentPath = usePathname();
     const router = useRouter();
     const navItems = [
@@ -48,106 +47,140 @@ const Sidebar = ({ isOpen }) => {
     };
 
     return (
-        <div
-            className={`${isOpen ? "w-64" : "w-20"
-                } bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-all duration-300 ease-in-out`}
-        >
-            {/* Logo */}
-            <div className="flex items-center justify-center h-16 border-b border-gray-200 dark:border-gray-700">
-                {isOpen ? (
-                    <h1 className="text-xl font-bold text-emerald-600 dark:text-emerald-400 transition-colors duration-300">
-                        ExamManager
-                    </h1>
-                ) : (
-                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110">
-                        <span className="text-white font-bold">EM</span>
-                    </div>
-                )}
-            </div>
+        <>
+            {/* Mobile Overlay */}
+            {isOpen && (
+                <div
+                    className="fixed inset-0  backdrop-blur-md bg-opacity-50 z-40 lg:hidden"
+                    onClick={() => setSidebarOpen(!isOpen)}
+                />
+            )}
 
-            {/* Navigation Items */}
-            <nav className="flex-1 overflow-y-auto py-4">
-                <ul className="space-y-2 px-2">
-                    {navItems.map((item) => {
-                        const isActive = item.path === currentPath;
-                        return (
-                            <li key={item.name}>
-                                <Link
-                                    href={item.path}
-                                    aria-current={isActive ? "page" : undefined}
-                                    className={`flex items-center p-3 rounded-lg group transition-colors duration-300 
-              ${isActive
-                                            ? "bg-emerald-700 text-white dark:text-white"
-                                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                        }
-            `}
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className={`h-6 w-6 transition-colors duration-300 
-                ${isActive
-                                                ? "text-white"
-                                                : "text-emerald-500 dark:text-emerald-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-300"
-                                            }
-              `}
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d={item.icon}
-                                        />
-                                    </svg>
-                                    {isOpen && (
-                                        <span
-                                            className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
-                                                }`}
-                                        >
-                                            {item.name}
-                                        </span>
-                                    )}
-                                </Link>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </nav>
-
-            {/* Logout Button */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-                <button
-                    onClick={handleLogout}
-                    className={`flex items-center w-full p-3 rounded-lg group transition-colors duration-300 cursor-pointer
-                    text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700`}
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-red-500 dark:text-red-400 group-hover:text-red-600 dark:group-hover:text-red-300"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+            {/* Sidebar */}
+            <div
+                className={`fixed lg:relative z-50 ${isOpen ? "w-64" : "w-20"
+                    } bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-all duration-300 ease-in-out h-screen ${isOpen ? "left-0" : "-left-20 lg:left-0"
+                    }`}
+            >
+                {/* Close Button for Mobile */}
+                {isOpen && (
+                    <button
+                        onClick={() => setSidebarOpen(!isOpen)}
+                        className="cursor-pointer lg:hidden absolute right-4 top-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
                     >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                        />
-                    </svg>
-                    {isOpen && (
-                        <span
-                            className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
-                                }`}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
                         >
-                            Logout
-                        </span>
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+                )}
+
+                {/* Logo */}
+                <div className="flex items-center justify-center h-16 border-b border-gray-200 dark:border-gray-700">
+                    {isOpen ? (
+                        <h1 className="text-xl font-bold text-primary-600 dark:text-primary-400 transition-colors duration-300">
+                            ExamManager
+                        </h1>
+                    ) : (
+                        <div className="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110">
+                            <span className="text-white font-bold">EM</span>
+                        </div>
                     )}
-                </button>
+                </div>
+
+                {/* Navigation Items */}
+                <nav className="flex-1 overflow-y-auto py-4">
+                    <ul className="space-y-2 px-2">
+                        {navItems.map((item) => {
+                            const isActive = item.path === currentPath;
+                            return (
+                                <li key={item.name}>
+                                    <Link
+                                        href={item.path}
+                                        aria-current={isActive ? "page" : undefined}
+                                        className={`flex items-center p-3 rounded-lg group transition-colors duration-300 
+                                        ${isActive
+                                                ? "bg-primary-700 text-white dark:text-white"
+                                                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                            }`}
+                                        onClick={() => setSidebarOpen(!isOpen)}
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className={`h-6 w-6 transition-colors duration-300 
+                                            ${isActive
+                                                    ? "text-white"
+                                                    : "text-primary-500 dark:text-primary-400 group-hover:text-primary-600 dark:group-hover:text-primary-300"
+                                                }`}
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d={item.icon}
+                                            />
+                                        </svg>
+                                        {isOpen && (
+                                            <span
+                                                className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                                                    }`}
+                                            >
+                                                {item.name}
+                                            </span>
+                                        )}
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </nav>
+
+                {/* Logout Button */}
+                <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                    <button
+                        onClick={handleLogout}
+                        className={`flex items-center w-full p-3 rounded-lg group transition-colors duration-300 cursor-pointer
+                        text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700`}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 text-red-500 dark:text-red-400 group-hover:text-red-600 dark:group-hover:text-red-300"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                            />
+                        </svg>
+                        {isOpen && (
+                            <span
+                                className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                                    }`}
+                            >
+                                Logout
+                            </span>
+                        )}
+                    </button>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   return (
     <div className="flex h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       {/* Sidebar */}
-      <Sidebar isOpen={sidebarOpen} />
+      <Sidebar isOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">

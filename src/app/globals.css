@@ -2,24 +2,96 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary-100: var(--color-primary-100); /* color primary 100 */
+  --color-primary-200: var(--color-primary-200); /* color primary 200 */
+  --color-primary-300: var(--color-primary-300); /* color primary 300 */
+  --color-primary-400: var(--color-primary-400); /* color primary 400 */
+  --color-primary-500: var(--color-primary-500); /* color primary 500 */
+  --color-primary-600: var(--color-primary-600); /* color primary 600 */
+  --color-primary-700: var(--color-primary-700); /* color primary 700 */
+  --color-primary-800: var(--color-primary-800); /* color primary 800 */
+  --color-primary-900: var(--color-primary-900); /* color primary 900 */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-/* @media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-primary-100: hsl(152, 76%, 90%); /* emerald-100 */
+    --color-primary-200: hsl(154, 76%, 80%); /* emerald-200 */
+    --color-primary-300: hsl(156, 72%, 67%); /* emerald-300 */
+    --color-primary-400: hsl(158, 64%, 52%); /* emerald-400 */
+    --color-primary-500: hsl(160, 84%, 39%); /* emerald-500 */
+    --color-primary-600: hsl(160, 84%, 33%); /* emerald-600 */
+    --color-primary-700: hsl(161, 94%, 26%); /* emerald-700 */
+    --color-primary-800: hsl(163, 94%, 20%); /* emerald-800 */
+    --color-primary-900: hsl(164, 93%, 15%); /* emerald-900 */
   }
-} */
+
+  * {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+}
+/* theme blue */
+.theme-blue {
+  --color-primary-100: hsl(213, 100%, 95%); /* blue-100 */
+  --color-primary-200: hsl(213, 94%, 87%); /* blue-200 */
+  --color-primary-300: hsl(212, 96%, 78%); /* blue-300 */
+  --color-primary-400: hsl(213, 94%, 68%); /* blue-400 */
+  --color-primary-500: hsl(217, 91%, 60%); /* blue-500 */
+  --color-primary-600: hsl(221, 83%, 53%); /* blue-600 */
+  --color-primary-700: hsl(224, 76%, 48%); /* blue-700 */
+  --color-primary-800: hsl(226, 71%, 40%); /* blue-800 */
+  --color-primary-900: hsl(228, 63%, 34%); /* blue-900 */
+}
+/* theme orange */
+.theme-orange {
+  --color-primary-100: hsl(33, 100%, 92%); /* orange-100 */
+  --color-primary-200: hsl(34, 100%, 85%); /* orange-200 */
+  --color-primary-300: hsl(33, 100%, 70%); /* orange-300 */
+  --color-primary-400: hsl(31, 100%, 60%); /* orange-400 */
+  --color-primary-500: hsl(27, 96%, 53%); /* orange-500 */
+  --color-primary-600: hsl(25, 90%, 48%); /* orange-600 */
+  --color-primary-700: hsl(22, 82%, 39%); /* orange-700 */
+  --color-primary-800: hsl(20, 77%, 31%); /* orange-800 */
+  --color-primary-900: hsl(17, 75%, 25%); /* orange-900 */
+}
+
+/* theme rose */
+.theme-rose {
+  --color-primary-100: hsl(330, 100%, 95%); /* rose-100 */
+  --color-primary-200: hsl(330, 100%, 90%); /* rose-200 */
+  --color-primary-300: hsl(330, 95%, 83%); /* rose-300 */
+  --color-primary-400: hsl(330, 90%, 70%); /* rose-400 */
+  --color-primary-500: hsl(330, 81%, 60%); /* rose-500 */
+  --color-primary-600: hsl(330, 75%, 51%); /* rose-600 */
+  --color-primary-700: hsl(330, 70%, 45%); /* rose-700 */
+  --color-primary-800: hsl(329, 65%, 37%); /* rose-800 */
+  --color-primary-900: hsl(328, 61%, 30%); /* rose-900 */
+}
+/* theme sky */
+.theme-sky {
+  --color-primary-100: hsl(204, 100%, 97%); /* sky-100 */
+  --color-primary-200: hsl(204, 94%, 94%); /* sky-200 */
+  --color-primary-300: hsl(201, 94%, 86%); /* sky-300 */
+  --color-primary-400: hsl(199, 95%, 74%); /* sky-400 */
+  --color-primary-500: hsl(198, 93%, 60%); /* sky-500 */
+  --color-primary-600: hsl(198, 88%, 48%); /* sky-600 */
+  --color-primary-700: hsl(200, 90%, 41%); /* sky-700 */
+  --color-primary-800: hsl(202, 90%, 36%); /* sky-800 */
+  --color-primary-900: hsl(204, 80%, 32%); /* sky-900 */
+}
+/* theme violet */
+.theme-violet {
+  --color-primary-100: hsl(250, 100%, 95%); /* violet-100 */
+  --color-primary-200: hsl(251, 95%, 89%); /* violet-200 */
+  --color-primary-300: hsl(252, 94%, 82%); /* violet-300 */
+  --color-primary-400: hsl(254, 90%, 74%); /* violet-400 */
+  --color-primary-500: hsl(256, 85%, 67%); /* violet-500 */
+  --color-primary-600: hsl(258, 78%, 60%); /* violet-600 */
+  --color-primary-700: hsl(262, 72%, 51%); /* violet-700 */
+  --color-primary-800: hsl(265, 70%, 44%); /* violet-800 */
+  --color-primary-900: hsl(267, 63%, 38%); /* violet-900 */
+}
 
 html {
   transition: background-color 0.5s ease, color 0.5s ease;
@@ -41,11 +113,10 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #007a55;
-  border-radius: 0;
+  @apply bg-primary-700;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #00bc7d;
+  @apply bg-primary-500;
 }
