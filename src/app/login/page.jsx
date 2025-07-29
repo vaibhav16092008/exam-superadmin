@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { postCallWA } from '@/utils/apiCall';
+import { getCall, postCallWA } from '@/utils/apiCall';
 import toast from 'react-hot-toast';
 import { setToken } from '@/utils/connection';
 import { useUser } from '@/contexts/UserContext';
@@ -31,6 +31,7 @@ const LoginPage = () => {
             if (response?.status === 200) {
                 toast.success(data?.message || "Login successful!");
                 setToken(data?.token);
+
                 setUser(data?.user)
                 router.push("/dashboard");
             }

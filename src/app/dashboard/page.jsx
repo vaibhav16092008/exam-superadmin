@@ -1,5 +1,6 @@
 "use client";
-import React from 'react';
+import { getCall } from '@/utils/apiCall';
+import React, { useEffect } from 'react';
 
 const DashboardPage = () => {
     const stats = [
@@ -10,6 +11,18 @@ const DashboardPage = () => {
         { title: "Avg. Score", value: "76%", change: "-2%", icon: "📈" },
         { title: "Pending Reviews", value: "14", change: "+4", icon: "⏳" }
     ];
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await getCall("users/get-profile");
+                console.log("User Profile:", response);
+            } catch (error) {
+                console.error("Error fetching user profile:", error);
+            }
+        };
+
+        fetchUserProfile();
+    }, []);
 
     return (
         <div className="space-y-6">
