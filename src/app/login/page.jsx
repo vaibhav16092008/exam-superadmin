@@ -35,11 +35,11 @@ const LoginPage = () => {
                 router.push("/dashboard");
             }
             else {
-                toast.error(data?.message)
+                toast.error(data?.message || "Server Error")
             }
         } catch (error) {
             toast.error(error);
-            console.log(error);
+            // console.log(error);
 
         } finally {
             setLoading(false)

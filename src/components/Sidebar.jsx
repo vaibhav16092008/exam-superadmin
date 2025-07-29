@@ -4,10 +4,21 @@ import { removeToken } from "@/utils/connection";
 import { NextURL } from "next/dist/server/web/next-url";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 const Sidebar = ({ isOpen, setSidebarOpen }) => {
     const currentPath = usePathname();
     const router = useRouter();
+    const [expandedMenus, setExpandedMenus] = useState({});
+    const [themeC, setThemeC] = useState(false)
+
+    const toggleMenu = (menuName) => {
+        setExpandedMenus(prev => ({
+            ...prev,
+            [menuName]: !prev[menuName]
+        }));
+    };
+
     const navItems = [
         {
             name: "Dashboard",
@@ -18,16 +29,54 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
             name: "Exams",
             icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
             path: "/exams",
+            submenu: [
+                {
+                    name: "Create Exam",
+                    path: "/exams/create",
+                },
+                {
+                    name: "Exam List",
+                    path: "/exams/list",
+                },
+                {
+                    name: "Results",
+                    path: "/exams/results",
+                }
+            ]
         },
         {
             name: "Questions",
             icon: "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
             path: "/questions",
+            submenu: [
+                {
+                    name: "Question Bank",
+                    path: "/questions/bank",
+                },
+                {
+                    name: "Import Questions",
+                    path: "/questions/import",
+                }
+            ]
         },
         {
             name: "Users",
             icon: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z",
             path: "/users",
+            submenu: [
+                {
+                    name: "All Users",
+                    path: "/users/all",
+                },
+                {
+                    name: "Roles",
+                    path: "/users/roles",
+                },
+                {
+                    name: "Permissions",
+                    path: "/users/permissions",
+                }
+            ]
         },
         {
             name: "Analytics",
@@ -38,6 +87,20 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
             name: "Settings",
             icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z",
             path: "/settings",
+            submenu: [
+                {
+                    name: "General",
+                    path: "/settings/general",
+                },
+                {
+                    name: "Themes",
+                    path: "/dashboard/settings/themes",
+                },
+                {
+                    name: "Notifications",
+                    path: "/settings/notifications",
+                }
+            ]
         },
     ];
 
@@ -46,16 +109,19 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
         router.push('/login');
     };
 
+    const isSubmenuActive = (submenu) => {
+        return submenu.some(item => item.path === currentPath);
+    };
+
     return (
         <>
             {/* Mobile Overlay */}
             {isOpen && (
                 <div
-                    className="fixed inset-0  backdrop-blur-md bg-opacity-50 z-40 lg:hidden"
+                    className="fixed inset-0 backdrop-blur-md bg-opacity-50 z-40 lg:hidden"
                     onClick={() => setSidebarOpen(!isOpen)}
                 />
             )}
-
             {/* Sidebar */}
             <div
                 className={`fixed lg:relative z-50 ${isOpen ? "w-64" : "w-20"
@@ -100,48 +166,134 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
 
                 {/* Navigation Items */}
                 <nav className="flex-1 overflow-y-auto py-4">
-                    <ul className="space-y-2 px-2">
+                    <ul className="space-y-1 px-2">
                         {navItems.map((item) => {
-                            const isActive = item.path === currentPath;
+                            const isActive = item.path === currentPath ||
+                                (item.submenu && isSubmenuActive(item.submenu));
+                            const isExpanded = expandedMenus[item.name];
+
                             return (
                                 <li key={item.name}>
-                                    <Link
-                                        href={item.path}
-                                        aria-current={isActive ? "page" : undefined}
-                                        className={`flex items-center p-3 rounded-lg group transition-colors duration-300 
-                                        ${isActive
-                                                ? "bg-primary-700 text-white dark:text-white"
-                                                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                            }`}
-                                        onClick={() => setSidebarOpen(!isOpen)}
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className={`h-6 w-6 transition-colors duration-300 
-                                            ${isActive
-                                                    ? "text-white"
-                                                    : "text-primary-500 dark:text-primary-400 group-hover:text-primary-600 dark:group-hover:text-primary-300"
-                                                }`}
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d={item.icon}
-                                            />
-                                        </svg>
-                                        {isOpen && (
-                                            <span
-                                                className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                                    <div className="flex flex-col">
+                                        {item.submenu ? (
+                                            <>
+                                                <button
+                                                    onClick={() => toggleMenu(item.name)}
+                                                    className={`flex items-center justify-between w-full p-3 rounded-lg group transition-colors duration-300 
+                                                    ${isActive
+                                                            ? "bg-primary-700 text-white dark:text-white"
+                                                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                        }`}
+                                                >
+                                                    <div className="flex items-center">
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            className={`h-6 w-6 transition-colors duration-300 
+                                                            ${isActive
+                                                                    ? "text-white"
+                                                                    : "text-primary-500 dark:text-primary-400 group-hover:text-primary-600 dark:group-hover:text-primary-300"
+                                                                }`}
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d={item.icon}
+                                                            />
+                                                        </svg>
+                                                        {isOpen && (
+                                                            <span
+                                                                className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                                                                    }`}
+                                                            >
+                                                                {item.name}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                    {isOpen && (
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            className={`h-4 w-4 transform transition-transform duration-200 ${isExpanded ? "rotate-90" : ""}`}
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M9 5l7 7-7 7"
+                                                            />
+                                                        </svg>
+                                                    )}
+                                                </button>
+                                                {isExpanded && isOpen && (
+                                                    <ul className="ml-8 mt-1 space-y-1">
+                                                        {item.submenu.map((subItem) => {
+                                                            const isSubActive = subItem.path === currentPath;
+                                                            return (
+                                                                <li key={subItem.name}>
+                                                                    <Link
+                                                                        href={subItem.path}
+                                                                        className={`flex items-center p-2 rounded-lg group transition-colors duration-300 
+                                                                        ${isSubActive
+                                                                                ? "bg-primary-100 text-primary-700 dark:bg-gray-700 dark:text-white"
+                                                                                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                            }`}
+                                                                    >
+                                                                        <span className="text-sm">
+                                                                            {subItem.name}
+                                                                        </span>
+                                                                    </Link>
+                                                                </li>
+                                                            );
+                                                        })}
+                                                    </ul>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <Link
+                                                href={item.path}
+                                                aria-current={isActive ? "page" : undefined}
+                                                className={`flex items-center p-3 rounded-lg group transition-colors duration-300 
+                                                ${isActive
+                                                        ? "bg-primary-700 text-white dark:text-white"
+                                                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                                                     }`}
+                                                onClick={() => setSidebarOpen(!isOpen)}
                                             >
-                                                {item.name}
-                                            </span>
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    className={`h-6 w-6 transition-colors duration-300 
+                                                    ${isActive
+                                                            ? "text-white"
+                                                            : "text-primary-500 dark:text-primary-400 group-hover:text-primary-600 dark:group-hover:text-primary-300"
+                                                        }`}
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d={item.icon}
+                                                    />
+                                                </svg>
+                                                {isOpen && (
+                                                    <span
+                                                        className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                                                            }`}
+                                                    >
+                                                        {item.name}
+                                                    </span>
+                                                )}
+                                            </Link>
                                         )}
-                                    </Link>
+                                    </div>
                                 </li>
                             );
                         })}
