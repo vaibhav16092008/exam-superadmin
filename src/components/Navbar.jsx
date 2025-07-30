@@ -3,8 +3,9 @@
 import { useUser } from "@/contexts/UserContext";
 
 const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
-    const { user } = useUser();
-    const name = user?.name.split(" ").map(word => word[0].toUpperCase()).join("");
+    // const { user } = useUser();
+    // const name = user?.name.split(" ").map(word => word[0].toUpperCase()).join("");
+    const name = "VK";
 
 
     return (

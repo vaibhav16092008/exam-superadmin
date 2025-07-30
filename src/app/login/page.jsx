@@ -8,7 +8,7 @@ import { setToken } from '@/utils/connection';
 import { useUser } from '@/contexts/UserContext';
 
 const LoginPage = () => {
-    const { setUser } = useUser();
+    // const { setUser } = useUser();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ const LoginPage = () => {
                 toast.success(data?.message || "Login successful!");
                 setToken(data?.token);
 
-                setUser(data?.user)
+                // setUser(data?.user)
                 router.push("/dashboard");
             }
             else {

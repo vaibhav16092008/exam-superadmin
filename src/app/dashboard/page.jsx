@@ -1,8 +1,11 @@
 "use client";
+import { setUser } from '@/redux/slices/userSlice';
 import { getCall } from '@/utils/apiCall';
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 const DashboardPage = () => {
+    const dispatch = useDispatch();
     const stats = [
         { title: "Total Exams", value: "24", change: "+12%", icon: "📊" },
         { title: "Active Users", value: "1,234", change: "+5%", icon: "👥" },
@@ -15,6 +18,7 @@ const DashboardPage = () => {
         const fetchUserProfile = async () => {
             try {
                 const response = await getCall("users/get-profile");
+                // dispatch(setUser(response.data))
                 console.log("User Profile:", response);
             } catch (error) {
                 console.error("Error fetching user profile:", error);
