@@ -25,7 +25,7 @@ const LoginPage = () => {
         }
         try {
             const response = await postCallWA("auth/login", payload);
-            const data = response?.data
+            const data = response?.data;
             console.log(data);
 
             if (response?.status === 200) {
@@ -33,7 +33,7 @@ const LoginPage = () => {
                 setToken(data?.token);
 
                 // setUser(data?.user)
-                router.push("/dashboard");
+                window.location.replace('/dashboard');
             }
             else {
                 toast.error(data?.message || "Server Error")

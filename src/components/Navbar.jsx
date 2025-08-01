@@ -1,11 +1,13 @@
 'use client';
 
 import { useUser } from "@/contexts/UserContext";
+import { useSelector } from "react-redux";
 
 const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
     // const { user } = useUser();
-    // const name = user?.name.split(" ").map(word => word[0].toUpperCase()).join("");
-    const name = "VK";
+    const user = useSelector((state) => state.user.user)
+
+    const name = user?.name.split(" ").map(word => word[0].toUpperCase()).join("");
 
 
     return (
@@ -55,7 +57,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
                     <div className="relative">
                         <button className="flex items-center space-x-2 focus:outline-none group">
                             <div className="h-8 w-8 rounded-full bg-primary-500 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                                <span className="text-white font-medium">{name}</span>
+                                <span className="text-white font-medium">{name ? name : "EM"}</span>
                             </div>
                             <span className="text-gray-700 dark:text-white text-sm font-medium hidden md:inline-block transition-colors duration-300">
                                 Super Admin

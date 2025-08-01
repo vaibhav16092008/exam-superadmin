@@ -96,6 +96,253 @@
   --color-primary-900: hsl(204, 80%, 32%); /* sky-900 */
 }
 
+/* theme green  */
+.theme-green {
+  --color-primary-100: hsl(138, 76%, 95%);
+  --color-primary-200: hsl(140, 70%, 88%);
+  --color-primary-300: hsl(141, 65%, 78%);
+  --color-primary-400: hsl(142, 63%, 65%);
+  --color-primary-500: hsl(144, 61%, 52%);
+  --color-primary-600: hsl(146, 58%, 44%);
+  --color-primary-700: hsl(148, 53%, 36%);
+  --color-primary-800: hsl(151, 50%, 30%);
+  --color-primary-900: hsl(153, 45%, 25%);
+}
+
+/* theme lime */
+.theme-lime {
+  --color-primary-100: hsl(85, 80%, 94%);
+  --color-primary-200: hsl(85, 78%, 85%);
+  --color-primary-300: hsl(85, 76%, 72%);
+  --color-primary-400: hsl(85, 74%, 60%);
+  --color-primary-500: hsl(85, 70%, 50%);
+  --color-primary-600: hsl(85, 65%, 42%);
+  --color-primary-700: hsl(85, 60%, 35%);
+  --color-primary-800: hsl(85, 55%, 28%);
+  --color-primary-900: hsl(85, 50%, 22%);
+}
+
+/* theme pink */
+.theme-pink {
+  --color-primary-100: hsl(340, 100%, 95%);
+  --color-primary-200: hsl(340, 90%, 88%);
+  --color-primary-300: hsl(340, 85%, 80%);
+  --color-primary-400: hsl(340, 80%, 70%);
+  --color-primary-500: hsl(340, 75%, 60%);
+  --color-primary-600: hsl(340, 70%, 50%);
+  --color-primary-700: hsl(340, 65%, 42%);
+  --color-primary-800: hsl(340, 60%, 35%);
+  --color-primary-900: hsl(340, 55%, 28%);
+}
+
+/* theme teal */
+.theme-teal {
+  --color-primary-100: hsl(170, 80%, 95%);
+  --color-primary-200: hsl(170, 75%, 85%);
+  --color-primary-300: hsl(170, 70%, 75%);
+  --color-primary-400: hsl(170, 65%, 65%);
+  --color-primary-500: hsl(170, 60%, 55%);
+  --color-primary-600: hsl(170, 55%, 45%);
+  --color-primary-700: hsl(170, 50%, 38%);
+  --color-primary-800: hsl(170, 45%, 30%);
+  --color-primary-900: hsl(170, 40%, 25%);
+}
+
+/* theme brown */
+.theme-brown {
+  --color-primary-100: hsl(30, 40%, 92%);
+  --color-primary-200: hsl(30, 38%, 85%);
+  --color-primary-300: hsl(30, 36%, 75%);
+  --color-primary-400: hsl(30, 34%, 65%);
+  --color-primary-500: hsl(30, 32%, 55%);
+  --color-primary-600: hsl(30, 30%, 45%);
+  --color-primary-700: hsl(30, 28%, 38%);
+  --color-primary-800: hsl(30, 26%, 30%);
+  --color-primary-900: hsl(30, 24%, 25%);
+}
+
+/* theme fusichia */
+.theme-fuchsia {
+  --color-primary-100: hsl(295, 100%, 95%);
+  --color-primary-200: hsl(295, 90%, 88%);
+  --color-primary-300: hsl(295, 85%, 80%);
+  --color-primary-400: hsl(295, 80%, 70%);
+  --color-primary-500: hsl(295, 75%, 60%);
+  --color-primary-600: hsl(295, 70%, 50%);
+  --color-primary-700: hsl(295, 65%, 42%);
+  --color-primary-800: hsl(295, 60%, 35%);
+  --color-primary-900: hsl(295, 55%, 28%);
+}
+
+/* theme indigo */
+.theme-indigo {
+  --color-primary-100: hsl(235, 100%, 95%);
+  --color-primary-200: hsl(235, 95%, 88%);
+  --color-primary-300: hsl(235, 90%, 80%);
+  --color-primary-400: hsl(235, 85%, 70%);
+  --color-primary-500: hsl(235, 80%, 60%);
+  --color-primary-600: hsl(235, 75%, 50%);
+  --color-primary-700: hsl(235, 70%, 42%);
+  --color-primary-800: hsl(235, 65%, 35%);
+  --color-primary-900: hsl(235, 60%, 28%);
+}
+
+/* theme red */
+.theme-red {
+  --color-primary-100: hsl(0, 100%, 95%);
+  --color-primary-200: hsl(0, 90%, 88%);
+  --color-primary-300: hsl(0, 85%, 78%);
+  --color-primary-400: hsl(0, 80%, 68%);
+  --color-primary-500: hsl(0, 75%, 58%);
+  --color-primary-600: hsl(0, 70%, 48%);
+  --color-primary-700: hsl(0, 65%, 40%);
+  --color-primary-800: hsl(0, 60%, 32%);
+  --color-primary-900: hsl(0, 55%, 25%);
+}
+
+/* theme stone */
+.theme-stone {
+  --color-primary-100: hsl(42, 10%, 94%);
+  --color-primary-200: hsl(42, 9%, 85%);
+  --color-primary-300: hsl(42, 8%, 74%);
+  --color-primary-400: hsl(42, 7%, 64%);
+  --color-primary-500: hsl(42, 6%, 54%);
+  --color-primary-600: hsl(42, 5%, 44%);
+  --color-primary-700: hsl(42, 5%, 36%);
+  --color-primary-800: hsl(42, 4%, 28%);
+  --color-primary-900: hsl(42, 4%, 22%);
+}
+
+/* theme cyan */
+.theme-cyan {
+  --color-primary-100: hsl(185, 100%, 95%);
+  --color-primary-200: hsl(185, 90%, 88%);
+  --color-primary-300: hsl(185, 85%, 78%);
+  --color-primary-400: hsl(185, 80%, 68%);
+  --color-primary-500: hsl(185, 75%, 58%);
+  --color-primary-600: hsl(185, 70%, 48%);
+  --color-primary-700: hsl(185, 65%, 40%);
+  --color-primary-800: hsl(185, 60%, 32%);
+  --color-primary-900: hsl(185, 55%, 25%);
+}
+
+/* theme yellow */
+.theme-yellow {
+  --color-primary-100: hsl(50, 100%, 95%);
+  --color-primary-200: hsl(50, 95%, 85%);
+  --color-primary-300: hsl(50, 90%, 75%);
+  --color-primary-400: hsl(50, 85%, 65%);
+  --color-primary-500: hsl(50, 80%, 55%);
+  --color-primary-600: hsl(50, 75%, 45%);
+  --color-primary-700: hsl(50, 70%, 38%);
+  --color-primary-800: hsl(50, 65%, 30%);
+  --color-primary-900: hsl(50, 60%, 24%);
+}
+
+/* theme slate */
+.theme-slate {
+  --color-primary-100: hsl(215, 20%, 94%);
+  --color-primary-200: hsl(215, 19%, 85%);
+  --color-primary-300: hsl(215, 18%, 75%);
+  --color-primary-400: hsl(215, 17%, 65%);
+  --color-primary-500: hsl(215, 16%, 55%);
+  --color-primary-600: hsl(215, 15%, 45%);
+  --color-primary-700: hsl(215, 14%, 36%);
+  --color-primary-800: hsl(215, 13%, 28%);
+  --color-primary-900: hsl(215, 12%, 22%);
+}
+
+/* theme navy */
+.theme-navy {
+  --color-primary-100: hsl(220, 100%, 95%);
+  --color-primary-200: hsl(220, 95%, 85%);
+  --color-primary-300: hsl(220, 90%, 75%);
+  --color-primary-400: hsl(220, 85%, 65%);
+  --color-primary-500: hsl(220, 80%, 55%);
+  --color-primary-600: hsl(220, 75%, 45%);
+  --color-primary-700: hsl(220, 70%, 38%);
+  --color-primary-800: hsl(220, 65%, 30%);
+  --color-primary-900: hsl(220, 60%, 24%);
+}
+
+/* theme amber */
+.theme-amber {
+  --color-primary-100: hsl(45, 100%, 94%);
+  --color-primary-200: hsl(45, 95%, 86%);
+  --color-primary-300: hsl(45, 90%, 76%);
+  --color-primary-400: hsl(45, 85%, 65%);
+  --color-primary-500: hsl(45, 80%, 55%);
+  --color-primary-600: hsl(45, 75%, 45%);
+  --color-primary-700: hsl(45, 70%, 37%);
+  --color-primary-800: hsl(45, 65%, 30%);
+  --color-primary-900: hsl(45, 60%, 24%);
+}
+
+/* theme grape */
+.theme-grape {
+  --color-primary-100: hsl(280, 100%, 95%);
+  --color-primary-200: hsl(280, 95%, 88%);
+  --color-primary-300: hsl(280, 90%, 78%);
+  --color-primary-400: hsl(280, 85%, 68%);
+  --color-primary-500: hsl(280, 80%, 58%);
+  --color-primary-600: hsl(280, 75%, 48%);
+  --color-primary-700: hsl(280, 70%, 40%);
+  --color-primary-800: hsl(280, 65%, 32%);
+  --color-primary-900: hsl(280, 60%, 26%);
+}
+
+/* theme sand */
+.theme-sand {
+  --color-primary-100: hsl(42, 90%, 96%);
+  --color-primary-200: hsl(42, 85%, 88%);
+  --color-primary-300: hsl(42, 80%, 78%);
+  --color-primary-400: hsl(42, 75%, 66%);
+  --color-primary-500: hsl(42, 70%, 54%);
+  --color-primary-600: hsl(42, 65%, 44%);
+  --color-primary-700: hsl(42, 60%, 36%);
+  --color-primary-800: hsl(42, 55%, 30%);
+  --color-primary-900: hsl(42, 50%, 25%);
+}
+
+/* theme maroon */
+.theme-maroon {
+  --color-primary-100: hsl(350, 90%, 96%);
+  --color-primary-200: hsl(350, 85%, 88%);
+  --color-primary-300: hsl(350, 80%, 78%);
+  --color-primary-400: hsl(350, 75%, 66%);
+  --color-primary-500: hsl(350, 70%, 54%);
+  --color-primary-600: hsl(350, 65%, 44%);
+  --color-primary-700: hsl(350, 60%, 36%);
+  --color-primary-800: hsl(350, 55%, 30%);
+  --color-primary-900: hsl(350, 50%, 24%);
+}
+
+/* theme forest */
+.theme-forest {
+  --color-primary-100: hsl(135, 50%, 94%);
+  --color-primary-200: hsl(135, 48%, 86%);
+  --color-primary-300: hsl(135, 46%, 76%);
+  --color-primary-400: hsl(135, 44%, 66%);
+  --color-primary-500: hsl(135, 42%, 54%);
+  --color-primary-600: hsl(135, 40%, 44%);
+  --color-primary-700: hsl(135, 38%, 36%);
+  --color-primary-800: hsl(135, 36%, 28%);
+  --color-primary-900: hsl(135, 34%, 22%);
+}
+
+/* theme charcoal */
+.theme-charcoal {
+  --color-primary-100: hsl(210, 5%, 92%);
+  --color-primary-200: hsl(210, 5%, 82%);
+  --color-primary-300: hsl(210, 5%, 72%);
+  --color-primary-400: hsl(210, 5%, 62%);
+  --color-primary-500: hsl(210, 5%, 52%);
+  --color-primary-600: hsl(210, 5%, 42%);
+  --color-primary-700: hsl(210, 5%, 34%);
+  --color-primary-800: hsl(210, 5%, 26%);
+  --color-primary-900: hsl(210, 5%, 20%);
+}
+
 html {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
@@ -122,4 +369,16 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-primary-500;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

@@ -14,19 +14,19 @@ const DashboardPage = () => {
         { title: "Avg. Score", value: "76%", change: "-2%", icon: "📈" },
         { title: "Pending Reviews", value: "14", change: "+4", icon: "⏳" }
     ];
-    useEffect(() => {
-        const fetchUserProfile = async () => {
-            try {
-                const response = await getCall("users/get-profile");
-                // dispatch(setUser(response.data))
-                console.log("User Profile:", response);
-            } catch (error) {
-                console.error("Error fetching user profile:", error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchUserProfile = async () => {
+    //         try {
+    //             const response = await getCall("users/get-profile");
+    //             dispatch(setUser(response.data.user))
+    //             console.log("User Profile:", response);
+    //         } catch (error) {
+    //             console.error("Error fetching user profile:", error);
+    //         }
+    //     };
 
-        fetchUserProfile();
-    }, []);
+    //     fetchUserProfile();
+    // }, []);
 
     return (
         <div className="space-y-6">

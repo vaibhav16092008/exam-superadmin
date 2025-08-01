@@ -69,8 +69,8 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
                     path: "/users/all",
                 },
                 {
-                    name: "Roles",
-                    path: "/users/roles",
+                    name: "Pendings",
+                    path: "/dashboard/approvals",
                 },
                 {
                     name: "Permissions",

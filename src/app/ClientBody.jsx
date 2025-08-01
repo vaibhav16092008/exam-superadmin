@@ -1,4 +1,5 @@
 'use client'
+import GetUser from '@/components/User/GetUser'
 import store from '@/redux/store'
 import React from 'react'
 import { Provider } from 'react-redux'
@@ -6,7 +7,9 @@ import { Provider } from 'react-redux'
 const ClientBody = ({ children }) => {
     return (
         <Provider store={store}>
-            {children}
+            <GetUser>
+                {children}
+            </GetUser>
         </Provider>
     )
 }
