@@ -10,7 +10,6 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
     const currentPath = usePathname();
     const router = useRouter();
     const [expandedMenus, setExpandedMenus] = useState({});
-    const [themeC, setThemeC] = useState(false)
 
     const toggleMenu = (menuName) => {
         setExpandedMenus(prev => ({
@@ -118,25 +117,27 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
             {/* Mobile Overlay */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 backdrop-blur-md bg-opacity-50 z-40 lg:hidden"
-                    onClick={() => setSidebarOpen(!isOpen)}
+                    className="fixed inset-0 backdrop-blur-md z-40 lg:hidden"
+                    onClick={() => setSidebarOpen(false)}
                 />
             )}
+
             {/* Sidebar */}
             <div
-                className={`fixed lg:relative z-50 ${isOpen ? "w-64" : "w-20"
-                    } bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-all duration-300 ease-in-out h-screen ${isOpen ? "left-0" : "-left-20 lg:left-0"
-                    }`}
+                className={`fixed lg:relative z-50 ${isOpen ? "w-64" : "w-20"} 
+                bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 
+                flex flex-col transition-all duration-300 ease-in-out h-screen 
+                ${isOpen ? "left-0" : "-left-20 lg:left-0"}`}
             >
                 {/* Close Button for Mobile */}
                 {isOpen && (
                     <button
-                        onClick={() => setSidebarOpen(!isOpen)}
-                        className="cursor-pointer lg:hidden absolute right-4 top-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                        onClick={() => setSidebarOpen(false)}
+                        className="absolute right-3 top-3 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 lg:hidden"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
+                            className="h-5 w-5"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -152,21 +153,21 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
                 )}
 
                 {/* Logo */}
-                <div className="flex items-center justify-center h-16 border-b border-gray-200 dark:border-gray-700">
+                <div className="flex items-center justify-center h-16 border-b border-gray-200 dark:border-gray-700 px-4">
                     {isOpen ? (
-                        <h1 className="text-xl font-bold text-primary-600 dark:text-primary-400 transition-colors duration-300">
+                        <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
                             ExamManager
                         </h1>
                     ) : (
-                        <div className="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110">
-                            <span className="text-white font-bold">EM</span>
+                        <div className="w-9 h-9 bg-primary-600 rounded-md flex items-center justify-center shadow-sm">
+                            <span className="text-white font-semibold text-sm">EM</span>
                         </div>
                     )}
                 </div>
 
                 {/* Navigation Items */}
                 <nav className="flex-1 overflow-y-auto py-4">
-                    <ul className="space-y-1 px-2">
+                    <ul className="space-y-1 px-3">
                         {navItems.map((item) => {
                             const isActive = item.path === currentPath ||
                                 (item.submenu && isSubmenuActive(item.submenu));
@@ -179,34 +180,34 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
                                             <>
                                                 <button
                                                     onClick={() => toggleMenu(item.name)}
-                                                    className={`flex items-center justify-between w-full p-3 rounded-lg group transition-colors duration-300 
+                                                    className={`flex items-center justify-between w-full p-2.5 rounded-md group transition-colors duration-200 
                                                     ${isActive
-                                                            ? "bg-primary-700 text-white dark:text-white"
-                                                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                            ? "bg-primary-600 text-white"
+                                                            : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/80"
                                                         }`}
                                                 >
                                                     <div className="flex items-center">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
-                                                            className={`h-6 w-6 transition-colors duration-300 
+                                                            className={`h-5 w-5 transition-colors duration-200 
                                                             ${isActive
                                                                     ? "text-white"
-                                                                    : "text-primary-500 dark:text-primary-400 group-hover:text-primary-600 dark:group-hover:text-primary-300"
+                                                                    : "text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400"
                                                                 }`}
                                                             fill="none"
                                                             viewBox="0 0 24 24"
                                                             stroke="currentColor"
+                                                            strokeWidth={isActive ? 2 : 1.5}
                                                         >
                                                             <path
                                                                 strokeLinecap="round"
                                                                 strokeLinejoin="round"
-                                                                strokeWidth={2}
                                                                 d={item.icon}
                                                             />
                                                         </svg>
                                                         {isOpen && (
                                                             <span
-                                                                className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                                                                className={`ml-3 text-sm font-medium transition-all duration-200 ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
                                                                     }`}
                                                             >
                                                                 {item.name}
@@ -216,7 +217,7 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
                                                     {isOpen && (
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
-                                                            className={`h-4 w-4 transform transition-transform duration-200 ${isExpanded ? "rotate-90" : ""}`}
+                                                            className={`h-4 w-4 transform transition-transform duration-200 ${isExpanded ? "rotate-90" : ""} ${isActive ? "text-white" : "text-gray-400"}`}
                                                             fill="none"
                                                             viewBox="0 0 24 24"
                                                             stroke="currentColor"
@@ -238,13 +239,13 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
                                                                 <li key={subItem.name}>
                                                                     <Link
                                                                         href={subItem.path}
-                                                                        className={`flex items-center p-2 rounded-lg group transition-colors duration-300 
+                                                                        className={`flex items-center px-3 py-2 text-sm rounded-md transition-colors duration-200 
                                                                         ${isSubActive
-                                                                                ? "bg-primary-100 text-primary-700 dark:bg-gray-700 dark:text-white"
-                                                                                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                                ? "bg-primary-100 text-primary-700 dark:bg-gray-700/50 dark:text-primary-400"
+                                                                                : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/60"
                                                                             }`}
                                                                     >
-                                                                        <span className="text-sm">
+                                                                        <span className="truncate">
                                                                             {subItem.name}
                                                                         </span>
                                                                     </Link>
@@ -258,34 +259,33 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
                                             <Link
                                                 href={item.path}
                                                 aria-current={isActive ? "page" : undefined}
-                                                className={`flex items-center p-3 rounded-lg group transition-colors duration-300 
+                                                className={`flex items-center p-2.5 rounded-md group transition-colors duration-200 
                                                 ${isActive
-                                                        ? "bg-primary-700 text-white dark:text-white"
-                                                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                        ? "bg-primary-600 text-white"
+                                                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/80"
                                                     }`}
-                                                onClick={() => setSidebarOpen(!isOpen)}
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
-                                                    className={`h-6 w-6 transition-colors duration-300 
+                                                    className={`h-5 w-5 transition-colors duration-200 
                                                     ${isActive
                                                             ? "text-white"
-                                                            : "text-primary-500 dark:text-primary-400 group-hover:text-primary-600 dark:group-hover:text-primary-300"
+                                                            : "text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400"
                                                         }`}
                                                     fill="none"
                                                     viewBox="0 0 24 24"
                                                     stroke="currentColor"
+                                                    strokeWidth={isActive ? 2 : 1.5}
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
-                                                        strokeWidth={2}
                                                         d={item.icon}
                                                     />
                                                 </svg>
                                                 {isOpen && (
                                                     <span
-                                                        className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                                                        className={`ml-3 text-sm font-medium transition-all duration-200 ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
                                                             }`}
                                                     >
                                                         {item.name}
@@ -304,26 +304,26 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
                 <div className="p-4 border-t border-gray-200 dark:border-gray-700">
                     <button
                         onClick={handleLogout}
-                        className={`flex items-center w-full p-3 rounded-lg group transition-colors duration-300 cursor-pointer
-                        text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700`}
+                        className={`flex items-center w-full p-2.5 rounded-md group transition-colors duration-200
+                        text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/80`}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6 text-red-500 dark:text-red-400 group-hover:text-red-600 dark:group-hover:text-red-300"
+                            className="h-5 w-5 text-red-500 dark:text-red-400 group-hover:text-red-600 dark:group-hover:text-red-300"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
+                            strokeWidth={1.5}
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                strokeWidth={2}
                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                             />
                         </svg>
                         {isOpen && (
                             <span
-                                className={`ml-3 transition-all duration-300 origin-left ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                                className={`ml-3 text-sm font-medium transition-all duration-200 ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
                                     }`}
                             >
                                 Logout

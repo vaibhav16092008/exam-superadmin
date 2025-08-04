@@ -3,6 +3,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import ThemeToggler from "@/components/ThemeToggler";
 import ClientBody from "./ClientBody";
+import CustomCursor from "@/components/CustomCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* <CustomCursor /> */}
         <ClientBody>
           {/* <UserProvider> */}
           <Toaster position="top-right" />
