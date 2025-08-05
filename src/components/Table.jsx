@@ -76,27 +76,35 @@ const Table = ({
             .catch(err => toast.error('Table data failed to copy'));
     };
 
-    // Function to export to Excel
-    const handleExportToExcel = () => {
-        // Prepare data for Excel
-        const excelData = [
-            columns.map(col => col.title), // Header row
-            ...data.map(item =>
-                columns.map(col =>
-                    col.render ? (col.renderText ? col.renderText(item) : '') : item[col.key]
+    // Function to export to CSV
+    const handleExportToCSV = () => {
+        // Prepare CSV header
+        const headers = columns.map(col => `"${col.title}"`).join(',');
 
-                )
-            )
-        ];
+        // Prepare CSV rows
+        const rows = data.map(item =>
+            columns.map(col =>
+                col.render
+                    ? (col.renderText ? `"${col.renderText(item)}"` : '""')
+                    : `"${item[col.key] !== undefined ? item[col.key] : ''}"`
+            ).join(',')
+        );
 
-        // Create workbook
-        const wb = XLSX.utils.book_new();
-        const ws = XLSX.utils.aoa_to_sheet(excelData);
-        XLSX.utils.book_append_sheet(wb, ws, title.substring(0, 31)); // Sheet name max 31 chars
+        // Combine header and rows
+        const csvContent = [headers, ...rows].join('\n');
 
-        // Export file
-        XLSX.writeFile(wb, `${title.replace(/[^a-z0-9]/gi, '_')}.xlsx`);
+        // Create Blob and download link
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', `${title.replace(/[^a-z0-9]/gi, '_')}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
+
 
     return (
         <div className="space-y-6">
@@ -122,7 +130,7 @@ const Table = ({
                             <DocumentDuplicateIcon className="h-4 w-4 text-gray-700 dark:text-gray-300" />
                         </button>
                         <button
-                            onClick={handleExportToExcel}
+                            onClick={handleExportToCSV}
                             className="p-2  rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                             title="Export to Excel"
                         >

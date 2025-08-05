@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { CheckIcon, ClockIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { getCall } from '@/utils/apiCall';
+import { getCall, putCall } from '@/utils/apiCall';
 import Table from '@/components/Table';
+import toast from 'react-hot-toast';
 
 const AdminApprovalPage = () => {
     const [users, setUsers] = useState([]);
@@ -21,7 +22,7 @@ const AdminApprovalPage = () => {
             const response = await getCall(`users/admins/pending?limit=${pagination.limit}&page=${pagination.page}`);
 
             if (!response.status === 200) {
-                throw new Error('Failed to fetch pending admins');
+                toast.error("Failed to fetch pending admins")
             }
 
             const data = response?.data;
@@ -43,16 +44,20 @@ const AdminApprovalPage = () => {
     }, [pagination.page, pagination.limit]);
 
     const handleApprove = async (user) => {
+        console.log(user);
+        const payload = { "isApproved": true }
         try {
-            const response = await fetch(`/api/users/approve-admin/${user._id}`, {
-                method: 'POST'
-            });
+            const response = await putCall(`users/admins/${user?._id || user?.id}/approval`, payload)
+            console.log(response);
 
-            if (!response.ok) {
-                throw new Error('Failed to approve admin');
+            if (response.status === 200) {
+                toast.success(response.data.message);
+                fetchPendingAdmins();
+            } else {
+                toast.error(response.data.message);
+
             }
 
-            fetchPendingAdmins();
         } catch (err) {
             console.error('Error approving admin:', err);
             setError(err.message);
@@ -60,18 +65,19 @@ const AdminApprovalPage = () => {
     };
 
     const handleReject = async (user) => {
+        const payload = { "isApproved": false }
         try {
-            const response = await fetch(`/api/users/reject-admin/${user._id}`, {
-                method: 'POST'
-            });
+            const response = await putCall(`users/admins/${user?._id || user?.id}/approval`, payload)
 
-            if (!response.ok) {
-                throw new Error('Failed to reject admin');
+            if (!response.status === 200) {
+                toast.error('Failed to reject admin');
+            } else {
+                toast.success('Admin Rejection Successful!');
+                fetchPendingAdmins();
             }
 
-            fetchPendingAdmins();
         } catch (err) {
-            console.error('Error rejecting admin:', err);
+            console.error('Error approving admin:', err);
             setError(err.message);
         }
     };
