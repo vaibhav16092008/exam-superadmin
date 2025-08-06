@@ -2,7 +2,6 @@
 import React, { useRef } from 'react';
 import { CheckIcon, XMarkIcon, ClockIcon, ArrowPathIcon, PrinterIcon, DocumentDuplicateIcon, DocumentArrowDownIcon } from '@heroicons/react/24/outline';
 import Pagination from '@/components/Pagination';
-import * as XLSX from 'xlsx';
 import toast from 'react-hot-toast';
 
 const Table = ({
@@ -20,6 +19,8 @@ const Table = ({
     rowKey = "id"
 }) => {
     const tableRef = useRef(null);
+
+    data.map((item) => console.log(item));
 
     // Function to handle printing the table
     const handlePrint = () => {

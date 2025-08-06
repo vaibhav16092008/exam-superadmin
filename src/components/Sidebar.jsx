@@ -65,11 +65,11 @@ const Sidebar = ({ isOpen, setSidebarOpen }) => {
             submenu: [
                 {
                     name: "All Users",
-                    path: "/users/all",
+                    path: "/dashboard/users",
                 },
                 {
                     name: "Pendings",
-                    path: "/dashboard/approvals",
+                    path: "/dashboard/users/approvals",
                 },
                 {
                     name: "Permissions",

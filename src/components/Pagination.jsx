@@ -13,7 +13,7 @@ const Pagination = ({
     const pageInputRef = useRef(null);
     const debounceTimer = useRef(null);
     const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
-    console.log(totalPages);
+
 
     const handlePageChange = (newPage) => {
         const validatedPage = Math.max(1, Math.min(newPage, totalPages));
