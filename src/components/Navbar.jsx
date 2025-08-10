@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from "@/contexts/UserContext";
+// import { useUser } from "@/contexts/UserContext";
 import { useSelector } from "react-redux";
 
 const Navbar = ({ sidebarOpen, setSidebarOpen }) => {

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { getCall, postCallWA } from '@/utils/apiCall';
 import toast from 'react-hot-toast';
 import { setToken } from '@/utils/connection';
-import { useUser } from '@/contexts/UserContext';
+// import { useUser } from '@/contexts/UserContext';
 
 const LoginPage = () => {
     // const { setUser } = useUser();

@@ -11,6 +11,8 @@ export default function GetUser({ children }) {
 
   const getUserData = useCallback(async () => {
     const response = await getCall("users/get-profile");
+    console.log(response);
+
     dispatch(setUser(response.data.user));
     if (response.status === 200) {
       dispatch(setUser(response.data.user));
