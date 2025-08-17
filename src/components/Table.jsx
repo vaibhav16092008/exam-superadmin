@@ -1,6 +1,6 @@
 "use client";
-import React, { useRef } from 'react';
-import { CheckIcon, XMarkIcon, ClockIcon, ArrowPathIcon, PrinterIcon, DocumentDuplicateIcon, DocumentArrowDownIcon } from '@heroicons/react/24/outline';
+import React, { useRef, useState } from 'react';
+import { CheckIcon, XMarkIcon, ClockIcon, ArrowPathIcon, PrinterIcon, DocumentDuplicateIcon, DocumentArrowDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import Pagination from '@/components/Pagination';
 import toast from 'react-hot-toast';
 
@@ -14,13 +14,21 @@ const Table = ({
     onPageChange,
     onLimitChange,
     onRefresh,
+    onSearch, // New prop for search functionality
     emptyState,
     rowActions,
     rowKey = "id"
 }) => {
     const tableRef = useRef(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
-    data.map((item) => console.log(item));
+    // Function to handle search
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (onSearch) {
+            onSearch(searchQuery);
+        }
+    };
 
     // Function to handle printing the table
     const handlePrint = () => {
@@ -66,7 +74,6 @@ const Table = ({
         const rows = data.map(item =>
             columns.map(col =>
                 col.render ? (col.renderText ? col.renderText(item) : '') : item[col.key]
-
             ).join('\t')
         ).join('\n');
 
@@ -106,7 +113,6 @@ const Table = ({
         document.body.removeChild(link);
     };
 
-
     return (
         <div className="space-y-6">
             {/* Header */}
@@ -114,6 +120,22 @@ const Table = ({
                 <h2 className="text-xl font-semibold">{title}</h2>
 
                 <div className="flex flex-wrap items-center gap-2">
+                    {/* Search Form */}
+                    {onSearch && (
+                        <form onSubmit={handleSearch} className="relative">
+                            <div className="flex items-center">
+                                <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white"
+                                />
+                                <MagnifyingGlassIcon className="absolute left-3 h-4 w-4 text-gray-400" />
+                            </div>
+                        </form>
+                    )}
+
                     {/* Export Toolbar */}
                     <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
                         <button

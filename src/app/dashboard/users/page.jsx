@@ -136,7 +136,7 @@ const AllUsers = () => {
 
     return (
         <Table
-            title="Pending Admin Approvals"
+            title="All Users"
             data={users}
             columns={columns}
             loading={loading}
@@ -146,7 +146,13 @@ const AllUsers = () => {
             onLimitChange={handleLimitChange}
             onRefresh={fetchAllUsers}
             emptyState={emptyState}
-            rowActions={rowActions}
+            rowActions={rowActions} onSearch={(query) => {
+                // Filter your data based on the query
+                setFilteredUsers(users.filter(user =>
+                    user.name.toLowerCase().includes(query.toLowerCase()) ||
+                    user.email.toLowerCase().includes(query.toLowerCase())
+                ));
+            }}
             rowKey="_id"
         />
     );
