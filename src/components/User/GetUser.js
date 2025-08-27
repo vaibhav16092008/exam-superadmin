@@ -18,7 +18,7 @@ export default function GetUser({ children }) {
       dispatch(setUser(response.data.user));
     } else {
       console.error("Failed to get user data:", response.data.message);
-      dispatch(clearUser(response.data.user));
+      dispatch(clearUser());
     }
   }, []);
 

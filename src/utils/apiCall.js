@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiConfig, token } from "@/utils/connection";
+import { apiConfig, removeToken, token } from "@/utils/connection";
 
 const apiInstance = axios.create({
   baseURL: apiConfig.baseURL,
@@ -18,9 +18,18 @@ const apiInstanceWA = axios.create({
   },
 });
 
+const handle401 = () => {
+  dispatch(clearUser());
+  removeToken();
+  router.push("/login");
+};
+
 export const postCall = async (url = "", data = "") => {
   try {
     const response = await apiInstance.post(url, data);
+    if (response.status === 401) {
+      handle401();
+    }
     return response;
   } catch (error) {
     return error.response;
@@ -30,6 +39,9 @@ export const postCall = async (url = "", data = "") => {
 export const putCall = async (url = "", data = "") => {
   try {
     const response = await apiInstance.put(url, data);
+    if (response.status === 401) {
+      handle401();
+    }
     return response;
   } catch (error) {
     return error.response;
@@ -39,6 +51,13 @@ export const putCall = async (url = "", data = "") => {
 export const getCall = async (url = "") => {
   try {
     const response = await apiInstance.get(url);
+    console.log(response);
+
+    if (response.status === 401) {
+      console.log("hi");
+
+      handle401();
+    }
     return response;
   } catch (error) {
     return error.response;
@@ -48,6 +67,9 @@ export const getCall = async (url = "") => {
 export const deleteCall = async (url = "") => {
   try {
     const response = await apiInstance.delete(url);
+    if (response.status === 401) {
+      handle401();
+    }
     return response;
   } catch (error) {
     return error.response;
